@@ -1,67 +1,54 @@
 import Link from "next/link";
 import { FiArrowRight } from "react-icons/fi";
 import Image from "next/image";
+import { Category } from "@/app/types";
+import { getImageUrl } from "@/app/lib/api";
 
 const categoryList = [
     {
         name: "Running",
         imgUrl: "category-running.png",
     },
-    {
-        name: "Tennis",
-        imgUrl: "category-tennis.png",
-    },
-    {
-        name: "Basketball",
-        imgUrl: "category-basketball.png",
-    },
-    {
-        name: "Football",
-        imgUrl: "category-football.png",
-    },
-    {
-        name: "Badminton",
-        imgUrl: "badminton.png",
-    },
-    {
-        name: "Swimming",
-        imgUrl: "category-swimming.png",
-    },
 ];
 
-const CategoriesSection = () => {
-    return (
-        <section id="catagory-section" className="container mx-auto pb-20">
-         <div className="flex justify-between">
-            <h2 className="font-bold text-2xl">Browse By Categories</h2>
-            <Link href="#" className="flex item-center gap-2 justify-between text-primary font-medium ">
-                <span className="self-center">See All Categories</span>
-                <FiArrowRight className="self-center" />
-            </Link>
-        </div>
-        <div className="grid grid-cols-6 gap-12 mt-8">
-            {categoryList.map( (category, index)=> (
-             <div 
-                className="rounded-lg bg-gradient-to-r from-[#F1F1F1] to-[#F7F7F7] w-full aspect-square flex justify-center items-center" 
-                key={index}
-            >
-                <div className="self center">
-                   <Image 
-                   src={`/images/categories/${category.imgUrl}`} 
-                   width={86} 
-                   height="86" 
-                   alt={category.name} 
-                   className="mb[10px]"
-                />
-                <div className="text-primary font-medium text-xl text-center">
-                    {category.name}
-                </div></div>
-            </div>
-            ))}
-        </div>
-        </section>
-    );
-}
+type TCategoriesProps = {
+  categories: Category[];
+};
 
+const CategoriesSection = ({ categories }: TCategoriesProps) => {
+  return (
+    <section id="category-section" className="container mx-auto pb-20">
+      <div className="flex justify-between">
+        <h2 className="font-bold text-2xl">Browse By Categories</h2>
+        <Link href="#" className="flex items-center gap-2 text-primary font-medium">
+          <span>See All Categories</span>
+          <FiArrowRight />
+        </Link>
+      </div>
+
+      <div className="grid grid-cols-6 gap-12 mt-8">
+        {categories.map((category) => (
+          <div
+            key={category._id}
+            className="rounded-lg bg-gradient-to-r from-[#F1F1F1] to-[#F7F7F7] w-full aspect-square flex justify-center items-center"
+          >
+            <div className="self-center">
+              <Image
+                src={getImageUrl(category.imageUrl)}
+                width={86}
+                height={86}
+                alt={category.name}
+                className="mb-[10px]"
+              />
+              <div className="text-primary font-medium text-xl text-center">
+                {category.name}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+};
 
 export default CategoriesSection;
