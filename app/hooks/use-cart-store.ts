@@ -7,7 +7,7 @@ export interface CartItem extends Product {
 } 
 
 export interface CustomerInfo {
-    custemerName: string;
+    customerName: string;
     customerContact: number | null;
     customerAddress: string;
 }
@@ -31,11 +31,11 @@ export const useCartStore = create<CartStore>() (
             },
             addItem: (product, qty = 1) => {
                 const items = get().items;
-                const existingItem = items.find((item) => items._id === product._id)
+                const existingItem = items.find((item) => item._id === product._id)
 
                 if (existingItem) {
                     set({
-                        items: this.items.map((item) => 
+                        items: items.map((item) => 
                         item._id === product._id ? {...item, qty: item.qty + qty}: item)
                     })
                 } else {

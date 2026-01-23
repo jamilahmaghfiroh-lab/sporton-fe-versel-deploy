@@ -64,7 +64,9 @@ const CartItems = ({handlePayment}: TCartItems) => {
                 <div className="text-primary text-xs">{priceFormatter (totalPrice)}
                 </div>
             </div>
-            <Button type="button" variant="dark" className="w-full mt-4 flex items-center justify-center gap-2" onClick={() => push ("/payment")}>
+            <Button type="button" variant="dark" 
+                className="w-full mt-4 flex items-center
+                justify-center gap-2" onClick={handlePayment} >
                <FiCreditCard className="text-lg" /> Proceed to Payment 
             </Button>
         </div> 
